@@ -102,3 +102,6 @@ Ejemplo de consumo en postman
 **GET** `/api/products/combos?budget=10`
 
 Backup de la base de datos se encuentra en el proyecto en `backup.sql`
+
+
+`Por efectos practicos de laboratorio no se tuvieron en cuenta (seguridad en las apis, sin embargo soy consiente de que se debe aplicar)`
