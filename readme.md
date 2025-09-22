@@ -23,6 +23,7 @@ Este documento explica **con qué se creó cada parte** del proyecto y **cómo e
 ```bash
 # Ejecutar frontend
 cd crud_app_p-m/app/app_frontend
+npm i
 npm start
 
 # Ejecutar backend
@@ -100,3 +101,4 @@ Ejemplo de consumo en postman
 ### Obtener combos por presupuesto
 **GET** `/api/products/combos?budget=10`
 
+Backup de la base de datos se encuentra en el proyecto en `backup.sql`

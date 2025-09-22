@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
+import axios from "axios";
 
 export default function MeowModal() {
   const [open, setOpen] = useState(false);
@@ -6,19 +7,33 @@ export default function MeowModal() {
   const dialogRef = useRef(null);
 
   useEffect(() => {
+    const controller = new AbortController();
+
     (async () => {
       try {
-        const res = await fetch('https://meowfacts.herokuapp.com/?count=2&lang=esp');
-        const json = await res.json();
-        const data = Array.isArray(json?.data) ? json.data : [];
+        const res = await axios.get(
+          "https://meowfacts.herokuapp.com/",
+          {
+            params: { count: 2, lang: "esp" },
+            signal: controller.signal,
+          }
+        );
+
+        const data = Array.isArray(res?.data?.data) ? res.data.data : [];
         if (data.length) {
           setFacts(data);
           setOpen(true);
         }
       } catch (e) {
-
+        if (axios.isCancel(e)) {
+          // petición cancelada: no hacer nada
+        } else {
+          console.error("Error cargando meowfacts:", e);
+        }
       }
     })();
+
+    return () => controller.abort();
   }, []);
 
   useEffect(() => {
